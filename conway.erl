@@ -2,28 +2,25 @@
 -export([
 	 iterate/1,
 	 next_cell_state/2,
-	 neighbors_for/2,
-	 neighbor_coords/2,
+	 living_neighbors_for/2,
+	 coordinates_of_neighbors/2,
 	 cell_at/2,
 	 iterate_cells/5
 	]).
 
-% 1 = alive
-% 0 = dead
-%
 % Grid is represented by a List of Lists of arbitrary size X
 
 % params:
 % life/death state of cell
 % number of living neighbors
-next_cell_state(1, 2) ->
-    1;
-next_cell_state(1, 3) ->
-    1;
-next_cell_state(0, 3) ->
-    1;
+next_cell_state(alive, 2) ->
+    alive;
+next_cell_state(alive, 3) ->
+    alive;
+next_cell_state(dead, 3) ->
+    alive;
 next_cell_state(_, _) ->
-    0.
+    dead.
 
 iterate(Grid) ->
     iterate_row(Grid, Grid, 1, []).
@@ -37,19 +34,22 @@ iterate_cells([], _, _, _, CellAcc) -> CellAcc;
 iterate_cells([ Cell | Cells ], Grid, X, Y, CellAcc) ->
     NewCell = next_cell_state(
 		Cell, 
-		neighbors_for({X, Y}, Grid)),
+		living_neighbors_for({X, Y}, Grid)),
     iterate_cells(Cells, Grid, X, Y + 1, [NewCell | CellAcc]).
     
 cell_at({ X, Y }, Grid) ->
-    lists:nth(X, lists:nth(Y, Grid)).
+    case lists:nth(X, lists:nth(Y, Grid)) of
+	alive -> 1;
+	dead  -> 0
+    end.
 
-neighbors_for(Coord, Grid) ->
+living_neighbors_for(Coord, Grid) ->
     lists:foldl(
       fun(XY, Acc) -> Acc + cell_at(XY, Grid) end,
       0,
-      neighbor_coords(Coord, Grid)).
+      coordinates_of_neighbors(Coord, Grid)).
     
-neighbor_coords({ X, Y }, Grid) ->
+coordinates_of_neighbors({ X, Y }, Grid) ->
     [ { NX, NY } ||
 	NX <- lists:seq(X - 1, X + 1),
 	NY <- lists:seq(Y - 1, Y + 1),

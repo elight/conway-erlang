@@ -3,24 +3,24 @@
 
 life_test() ->
     Input    = [
-		[1, 0, 1],
-		[0, 1, 0],
-		[1, 0, 1]
+		[alive,  dead, alive],
+		[ dead, alive,  dead],
+		[alive,  dead, alive]
 	       ],
     Expected = [
-		[0, 1, 0],
-		[1, 0, 1],
-		[0, 1, 0]
+		[ dead, alive,  dead],
+		[alive,  dead, alive],		
+		[ dead, alive,  dead]
 	       ],
     ?assertEqual(Expected, conway:iterate(Input)).
 
-neighbors_for_test() ->
+living_neighbors_for_test() ->
     Input    = [
-		[1, 0, 1],
-		[0, 1, 0],
-		[1, 0, 1]
+		[alive,  dead, alive],
+		[ dead, alive,  dead],
+		[alive,  dead, alive]		
 	       ],
-    ?assertEqual(4, conway:neighbors_for({2, 2}, Input)).
+    ?assertEqual(4, conway:living_neighbors_for({2, 2}, Input)).
 
 
 
