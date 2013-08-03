@@ -42,12 +42,7 @@ cell_at({ X, Y}, Grid) ->
 
 neighbors_for(Coord, Grid) ->
     lists:foldl(
-      fun(XY, Acc) -> 
-	      case cell_at(XY, Grid) of
-		    1 -> Acc + 1;
-		    0 -> Acc
-	      end
-      end,
+      fun(XY, Acc) -> Acc + cell_at(XY, Grid) end,
       0,
       neighbor_coords(Coord, Grid)).
     
