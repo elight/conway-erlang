@@ -13,6 +13,9 @@
 %
 % Grid is represented by a List of Lists of arbitrary size X
 
+% params:
+% life/death state of cell
+% number of living neighbors
 next_cell_state(1, 2) ->
     1;
 next_cell_state(1, 3) ->
