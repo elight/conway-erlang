@@ -9,14 +9,10 @@
 % params:
 % life/death state of cell
 % number of living neighbors
-next_cell_state(alive, 2) ->
-    alive;
-next_cell_state(alive, 3) ->
-    alive;
-next_cell_state(dead, 3) ->
-    alive;
-next_cell_state(_, _) ->
-    dead.
+next_cell_state(alive, 2) -> alive;
+next_cell_state(alive, 3) -> alive;
+next_cell_state(dead, 3) ->  alive;
+next_cell_state(_, _) ->     dead.
 
 iterate(Grid) ->
     iterate_row(Grid, Grid, 1, []).
