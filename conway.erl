@@ -1,11 +1,7 @@
 -module(conway).
 -export([
 	 iterate/1,
-	 next_cell_state/2,
-	 living_neighbors_for/2,
-	 coordinates_of_neighbors/2,
-	 cell_at/2,
-	 iterate_cells/5
+	 living_neighbors_for/2
 	]).
 
 % Grid is represented by a List of Lists of arbitrary size X
