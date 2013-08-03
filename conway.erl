@@ -40,7 +40,7 @@ iterate_cells([ Cell | Cells ], Grid, X, Y, CellAcc) ->
 		neighbors_for({X, Y}, Grid)),
     iterate_cells(Cells, Grid, X, Y + 1, [NewCell | CellAcc]).
     
-cell_at({ X, Y}, Grid) ->
+cell_at({ X, Y }, Grid) ->
     lists:nth(X, lists:nth(Y, Grid)).
 
 neighbors_for(Coord, Grid) ->
