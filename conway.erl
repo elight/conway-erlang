@@ -51,8 +51,8 @@ neighbors_for(Coord, Grid) ->
     
 neighbor_coords({ X, Y }, Grid) ->
     [ { NX, NY } ||
-	NX <- [ X - 1, X, X + 1 ],
-	NY <- [ Y - 1, Y, Y + 1 ],
+	NX <- lists:seq(X - 1, X + 1),
+	NY <- lists:seq(Y - 1, Y + 1),
 	{ NX, NY } /= { X, Y },
 	NX > 0, NY > 0,
 	NX =< length(Grid), NY =< length(Grid) ].
