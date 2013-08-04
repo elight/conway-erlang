@@ -20,7 +20,7 @@ iterate(Grid) ->
 iterate_row([], _, _, RowAcc) -> RowAcc;
 iterate_row([ Row | Rows ], Grid, X, RowAcc) ->
     NewRow = iterate_cells(Row, Grid, X, 1, []),
-    iterate_row(Rows, Grid, X + 1, RowAcc ++ [NewRow]).
+    iterate_row(Rows, Grid, X + 1, [NewRow | RowAcc]).
 
 iterate_cells([], _, _, _, CellAcc) -> CellAcc;
 iterate_cells([ Cell | Cells ], Grid, X, Y, CellAcc) ->
